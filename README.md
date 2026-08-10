@@ -2,7 +2,9 @@
 	<img src="./apps/desktop/src-tauri/icons/icon.png" alt="XStudio 图标" width="128" />
 </p>
 
-**永久免费，从 AI loop 流程到 Tool、模型协议，提供最大自由度的插件定制。**
+<p align="center">
+	<strong>永久免费，从 AI loop 流程到 Tool、模型协议，提供最大自由度的插件定制。</strong>
+</p>
 
 # XStudio
 
