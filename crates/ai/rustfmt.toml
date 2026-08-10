@@ -1,0 +1,24 @@
+# 开启不稳定紧凑配置
+unstable_features = true
+# 加宽单行阈值，减少换行（默认100，改成120/140，越长越紧凑）
+max_width = 120
+# 数组/集合单行阈值，数值越大越不容易拆多行
+array_width = 90
+# 结构体初始化单行阈值
+struct_lit_width = 90
+# 单行表达式函数压缩成一行 fn test(){1+1}
+fn_single_line = true
+# 大括号尽量同行（关键紧凑：struct/impl {同行，不另起大括号）
+brace_style = "PreferSameLine"
+# if/while等控制流大括号同行
+control_brace_style = "AlwaysSameLine"
+# 空impl/空fn保持单行（默认开启）
+empty_item_single_line = true
+# 缩短换行启发规则，尽量挤在一行
+use_small_heuristics = "Max"
+# 枚举对齐阈值变大，减少枚举自动换行
+enum_discrim_align_threshold = 30
+# 导入尽量合并单行
+imports_granularity = "Crate"
+# 核心：让闭包 + .await? 不换行
+overflow_delimited_expr = true

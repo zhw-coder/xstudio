@@ -1,0 +1,17 @@
+[package]
+name = "plugins"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+ai = { workspace = true }
+tool = { workspace = true }
+async-trait = { workspace = true }
+libloading = "0.8"
+reqwest = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+tokio = { workspace = true }
+xstudio-plugin-api = { path = "../../plugin-api" }

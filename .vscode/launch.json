@@ -1,0 +1,93 @@
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        
+        {
+            "name": "Debug unit tests in library 'xstudio_ai'",
+            "type": "lldb",
+            "request": "launch",
+            "cargo": {
+                "args": [
+                    "test"
+                ]
+            }
+        },
+        {
+            "name": "Debug integration test 'lifecycle_and_proxy'",
+            "type": "lldb",
+            "request": "launch",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--test=lifecycle_and_proxy"
+                ]
+            }
+        },
+        {
+            "name": "Debug integration test 'openai_provider'",
+            "type": "lldb",
+            "request": "launch",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--test=openai_provider",
+                    "--",
+                    "--nocapture"
+                ]
+            },
+            "program": "${workspaceFolder}/target/debug/deps/xstudio_ai-*.d",
+            "cwd": "${workspaceFolder}",
+            "sourceLanguages": ["rust"],
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Debug integration test 'harness_agent'",
+            "type": "lldb",
+            "request": "launch",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--test=harness_agent",
+                    "--",
+                    "--nocapture"
+                ]
+            },
+            "program": "${workspaceFolder}/target/debug/deps/xstudio_ai-*.d",
+            "cwd": "${workspaceFolder}",
+            "sourceLanguages": ["rust"],
+            "console": "integratedTerminal"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "调试 Tauri Rust 后端",
+            "cargo": {
+                "args": [
+                "run",
+                "--",
+                "--dev"
+                ],
+                "filter": {
+                "kind": "binary"
+                }
+            },
+            "cwd": "${workspaceFolder}/src-tauri",
+            "env": {
+                // 关键：指定前端开发服务地址，让tauri加载本地vite
+                "TAURI_DEV_URL": "http://localhost:5173"
+            },
+            "stopOnEntry": false,
+            "console": "integratedTerminal",
+            "sourceLanguages": ["rust"]
+        },
+        {
+            "name": "编译并部署示例插件",
+            "type": "node-terminal",
+            "request": "launch",
+            "command": "cargo build --manifest-path plugin-api/Cargo.toml && mkdir -p \"$HOME/.xstudio/plugins\" && cp target/debug/libxstudio_plugin_api.dylib \"$HOME/.xstudio/plugins/libxstudio_plugin_api.dylib\""
+        }
+    ]
+}
