@@ -27,6 +27,10 @@ use crate::agent::env::types::{
     ReadTextRangeResult,
 };
 
+/// Windows 子进程创建标志：不创建可见控制台窗口。
+#[cfg(windows)]
+const CREATE_NO_WINDOW: u32 = 0x0800_0000;
+
 /// 把文件元数据映射为 `FileKind`。
 fn file_kind_from_metadata(metadata: &std::fs::Metadata) -> Result<FileKind, FileError> {
     let file_type = metadata.file_type();
@@ -372,6 +376,13 @@ impl ExecutionEnv for LocalExecutionEnv {
         // Unix 子进程以自身 PID 创建新进程组，超时时可一次清理整个命令树。
         #[cfg(unix)]
         child.process_group(0);
+        // Windows PowerShell 不创建可见的控制台窗口。
+        #[cfg(windows)]
+        {
+            use std::os::windows::process::CommandExt;
+
+            child.creation_flags(CREATE_NO_WINDOW);
+        }
         // 异步 future 被 timeout 取消时仍确保 shell 本身会被结束。
         child.kill_on_drop(true);
         let child = child.spawn().map_err(|error| to_file_error(error, Some(&cwd)))?;

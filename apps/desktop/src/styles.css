@@ -1725,6 +1725,8 @@
   flex-direction: row;
   gap: 12px;
   min-height: 50px;
+  position: relative;
+  z-index: 1;
 }
 
 .ModelConfigFieldInline .ModelConfigLabel {
@@ -2363,11 +2365,6 @@
   --select-field-height: 26px;
   max-width: 100%;
   position: relative;
-}
-
-/* API 下拉需要覆盖模型列表的玻璃层叠上下文。 */
-.ModelConfigSelect {
-  z-index: 1;
 }
 
 .SelectFieldTrigger {
