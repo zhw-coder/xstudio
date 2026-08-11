@@ -16,7 +16,7 @@ jobs:
       matrix:
         include:
           - name: macOS Intel
-            os: macos-13
+            os: macos-15-intel
             tauriArgs: --target x86_64-apple-darwin
           - name: macOS Apple Silicon
             os: macos-14
