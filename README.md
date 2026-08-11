@@ -33,7 +33,7 @@
 | --- | --- |
 | 桌面应用 | [Tauri 2](https://v2.tauri.app/) + Rust |
 | 前端 | React 19 + TypeScript + Vite + Tailwind CSS v4 |
-| AI 运行时 | 基于 Pi 的设计理念，提供 Rust async Agent、Provider Registry、流式消息与 Harness |
+| AI 运行时 | 基于 Pi 的设计重写为Rust，提供 Rust async Agent、Provider Registry、流式消息与 Harness |
 | 本地存储 | SQLite、JSONL、内存会话 |
 | 扩展机制 | 版本化 C ABI + UTF-8 JSON 插件协议 |
 
