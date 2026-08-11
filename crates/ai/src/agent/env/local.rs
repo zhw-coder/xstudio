@@ -13,6 +13,8 @@ use std::{
     sync::Mutex,
     time::{SystemTime, UNIX_EPOCH},
 };
+#[cfg(windows)]
+use std::os::windows::process::CommandExt;
 use tokio::{
     fs,
     io::{AsyncBufReadExt, AsyncReadExt, AsyncSeekExt, BufReader},
@@ -26,10 +28,6 @@ use crate::agent::env::types::{
     FindFilesOptions, FindFilesResult, ReadBinaryRangeOptions, ReadBinaryRangeResult, ReadTextRangeOptions,
     ReadTextRangeResult,
 };
-
-/// Windows 子进程创建标志：不创建可见控制台窗口。
-#[cfg(windows)]
-const CREATE_NO_WINDOW: u32 = 0x0800_0000;
 
 /// 把文件元数据映射为 `FileKind`。
 fn file_kind_from_metadata(metadata: &std::fs::Metadata) -> Result<FileKind, FileError> {
@@ -378,11 +376,8 @@ impl ExecutionEnv for LocalExecutionEnv {
         child.process_group(0);
         // Windows PowerShell 不创建可见的控制台窗口。
         #[cfg(windows)]
-        {
-            use std::os::windows::process::CommandExt;
-
-            child.creation_flags(CREATE_NO_WINDOW);
-        }
+        // CREATE_NO_WINDOW：不创建可见控制台窗口。
+        child.creation_flags(0x0800_0000);
         // 异步 future 被 timeout 取消时仍确保 shell 本身会被结束。
         child.kill_on_drop(true);
         let child = child.spawn().map_err(|error| to_file_error(error, Some(&cwd)))?;
