@@ -134,7 +134,6 @@ async fn stream_uses_generations_for_text_only_context() {
         serde_json::from_slice(request_body(request.as_bytes())).expect("request should contain JSON");
 
     assert!(request.starts_with("POST /images/generations HTTP/1.1"));
-    assert_eq!(payload["response_format"], "b64_json");
     assert_eq!(payload["prompt"], "a cat");
     assert!(matches!(sink.events.first(), Some(AssistantMessageEvent::Start { .. })));
     assert!(matches!(sink.events.last(), Some(AssistantMessageEvent::Done { .. })));

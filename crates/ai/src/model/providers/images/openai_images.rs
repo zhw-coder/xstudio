@@ -213,7 +213,6 @@ fn build_payload(model: &Model, prompt: &str, options: &StreamOptions) -> Result
     let mut payload = Map::new();
     payload.insert("model".into(), json!(model.id));
     payload.insert("prompt".into(), json!(prompt));
-    payload.insert("response_format".into(), json!("b64_json"));
     for (key, value) in &options.metadata {
         payload.insert(key.clone(), value.clone());
     }
